@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>2. alkalom - Webfejlesztés a gyakorlatban</title>
+
+		<meta name="description" content="A 2012/2013 tavaszi félévben tartott Webfejlesztés a gyakorlatban kurzus előadásvázlata">
+		<meta name="author" content="Viktor Nagy">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/pulilab.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>Webfejlesztés a gyakorlatban</h1>
+					<h3>HTML, CSS és JS alapok</h3>
+					<p>
+						<small><a href="mailto:v@pulilab.com">Viktor Nagy</a>, <a href="http://pulilab.com">Pulilab Kft.</a></small>
+					</p>
+					<aside class="notes">
+						<ul id="toc"></ul>
+					</aside>
+				</section>
+				<section>
+					<section>
+						<h2>Hogyan működik a web?</h2>
+						<img src="webdev/img/web_request.png" alt="Web kérés feldolgozása">
+						<aside class="notes">
+							
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>HTML, CSS</h2>
+						<em>Ez nem a kurzus témája.</em>
+
+						<pre><code contenteditable>
+<!doctype html>
+<html lang="en">
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/reveal.css">
+	</head>
+	<body>
+		<h1>Header</h1>
+		<p>Paragraph</p>
+	</body>
+</html>
+						</code></pre>
+					</section>
+					<section>
+						<h2>HTML, CSS: Irodalom</h2>
+						<ul >
+							<li>HTML: https://developer.mozilla.org/en-US/docs/HTML</li>
+							<li>CSS: https://developer.mozilla.org/en-US/docs/CSS</li>
+						</ul>
+						<ul class="fragment">
+							<li><a href="http://lesscss.org/">LESS</a></li>
+							<li><a href="http://html5boilerplate.com/">HTML5 Boilerplate</a></li>
+							<li><a href="http://twitter.github.com/bootstrap/">Twitter bootstrap</a></li>
+						</ul>
+						<aside class="notes">
+							Ennyi volt a HTML+CSS, most jön a Javascript.
+							<li class="hf">Update your github page to have a proper (valid) html+css</li>
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Javascript I.: nyelv</h2>
+						<ul>
+							<li>nem tipizált</li>
+							<li>szkriptnyelv</li>
+							<li>egyre inkább mindenütt jelen van</li>
+							<li>régi, vannak hibái; most javítják (ECMA6)</li>
+						</ul>
+						<aside class="notes">
+							<li>létezik több nagyon elterjedt segédkönyvtár, amik elavulnak az ECMA6 elterjedésével (pl: underscore)</li>
+						</aside>
+					</section>
+					<section>
+						<h2>Javascript I.: típusok</h2>
+<ul>
+	<li class="fragment fade-out hide">
+	<pre><code>var string = 'hello';
+string = 102;
+</code></pre>	
+	</li>
+	<li class="fragment">Undefined, Null, Boolean, String</li>
+	<li class="fragment">Numeric<pre><code>1.0 === 1</code></pre></li>
+	<li class="fragment">Object
+		<q cite="http://dailyjs.com/2012/05/07/js101-object/">The main difference between objects and primitive values is objects are clearly comprised of multiple items</q>
+		<pre><code>
+var javascript = {
+  influences: ['C', 'Java', 'Scheme']
+, designer: 'Brendan Eich'
+, created: new Date(1995, 0, 1)
+};
+		</code></pre>
+	</li>
+</ul>
+						<aside class="notes">
+							<li>nem tipizált = ugyanazt a változót újradefiniálhatod, minden nehézség nélkül</li>
+						</aside>
+					</section>
+					<section>
+						<h2>Javascript I.: by val/by ref</h2>
+<blockquote cite="http://stackoverflow.com/a/7480691">JavaScript Objects (and by extension: arrays, regexes, dates, etc.) equality and assignment are reference based:
+<pre><code>{a:'a'} == {a:'a'} // false
+</code></pre>
+But:
+<pre><code>var myObject = {a:'a'};
+var myObject2 = myObject;
+
+myObject == myObject2 // true
+</code></pre>
+<p class="fragment">
+Furthermore:
+<pre class="fragment"><code>myObject.b = 'b';
+
+console.log(myObject2.b); // Logs: "b"
+</code></pre>
+</p>
+</blockquote>
+					<aside class="notes">
+						Mi történik a változóval?
+						<ol>
+							<li>Átadjuk egy függvénynek</li>
+							<li>Módosítjuk</li>
+							<li>A függvényen kívül használjuk</li>
+						</ol>
+					</aside>
+					</section>
+          <section>
+            <h2>Javascript 1.: scope</h2>
+            <p>A <code>var</code> statement</p>
+<pre class="fragment"><code>var a = 1;
+function hello() {
+  a = 2
+}
+hello();
+console.log(a); // -> 2
+</code></pre>
+          <p class="fragment">Block scope</p>
+<pre class="fragment"><code>function example() {
+  var o = {}, i = 0;
+  for (i = 0; i < 3; i++) {
+    o[i] = function() { console.log(i); };
+  }
+  o[0]();
+  o[1]();
+  o[2]();
+}
+
+example(); // -> 3, 3, 3
+</code></pre>
+<pre class="fragment"><code>function example() {
+  var o = {};
+
+  [0, 1, 2, 3].forEach(function(i) {
+    o[i] = function() { console.log(i); };
+  });
+
+  o[0]();
+  o[1]();
+  o[2]();
+}
+
+example(); // -> 1, 2, 3</code></pre>
+          </section>
+					<section>
+						<h2>Javascript I.: objects 1</h2>
+						<pre class="fragment fade-out hide"><code>var javascript = {
+  influences: ['C', 'Java', 'Scheme']
+, designer: 'Brendan Eich'
+, created: new Date(1995, 0, 1)
+};
+
+function Language(designer, created, influences) {
+  this.designer = designer;
+  this.created = created;
+  this.influences = influences;
+}
+
+var javascript = new Language(
+  'Brendan Eich'
+, new Date(1995, 0, 1)
+, ['C', 'Java', 'Scheme']
+);
+						</code></pre>
+						<p class="fragment">Mit várnánk még egy objektumtól?</p>
+						<li class="fragment">osztályokat</li>
+						<li class="fragment">öröklődést</li>
+						<li class="fragment">encapsulation</li>
+						<li class="fragment">polymorphism</li>
+						<aside class="notes">
+							<li>Ez és az előző teljesen azonos eredményt ad, csak ez általánosabb.</li>
+							<li>nincsenek külön osztályok és az öröklődést is külön le kell programozni, de használhatsz CoffeeScriptet is</li>
+						</aside>
+					</section>
+                    <section>
+            <h2>Javascript I.: objects 2</h2>
+            <em>this</em>
+            <p>Művelet vagy függvény? Egy objektum tulajdonságaként megadott függvény a művelet.</p>
+            <pre><code>var myobj = {
+  log_this: function() {console.log(this);}
+}
+var MyConst = function() {
+  this.log_this: function() {console.log(this);} 
+}
+myobj.log_this(); // => window
+myObj = new MyConst(); 
+myObj.log_this(); // => myObj
+window.setTimeout(myObj.log_this, 100); // => window
+</code></pre>
+            <blockquote class="fragment" cite="http://dailyjs.com/2012/06/18/js101-this/">if a function is called as a method on an object, or by using new, then the value of this will be the current instance of the object, otherwise it will be the global context</blockquote>
+            <aside class="notes">
+              <li class="hf">Dailjs cikk a <a href="http://dailyjs.com/2012/06/18/js101-this/">this-ről</a> és a <a href="http://dailyjs.com/2012/06/25/this-binding/">bindingról</a></li>
+            </aside>
+          </section>
+
+					<section>
+						<h2>Javascript I.: objects 3</h2>
+<pre class="fragment fade-out hide"><code>function Animal() {
+}
+console.log(Animal.prototype)
+
+Animal.prototype.type = 'Unknown';
+Animal.prototype.weight = 0;
+Animal.prototype.weightUnits = 'kg';
+
+Animal.prototype.toString = function() {
+  return this.type + ', ' + this.weight + this.weightUnits;
+};
+
+var molly = new Animal();
+molly.type = 'Dog';
+molly.weight = 28;
+
+console.log(molly.toString()); // -> "Dog, 28kg"
+</code></pre>
+						<li>Az öröklődés a prototype-n keresztül történik.</li>
+            <li class="fragment">Privát műveletek</li>
+<pre class="fragment"><code>function Animal(name) {
+  // a hello függvényt(!) nem lehet kívülről elérni
+  function hello(friend) {
+    console.log('hello ' + friend);
+  }
+  this.sayHello = hello;
+
+  // a name változót kívülről nem lehet elérni
+  this.getName = function(friend) {
+    console.log(name);
+  }
+};
+var lolka = new Animal('Lolka');
+lolka.sayHello('Bolka');
+lolka.getName();
+hello // -> hiba
+</code></pre>
+						<aside class="notes">
+							<li>minden objektumnak van prototype tulajdonsága</li>
+							<li>A byref/byval dia alapján, ha módosítom a prototype-ot, akkor <strong>később</strong> származtatott objektum értéke is módosul</li>
+							<li class="hf">DailJS cikk a prototype-ról <a href="http://dailyjs.com/2012/05/21/js101-prototype/">itt</a> és <a href="http://dailyjs.com/2012/05/28/js101-prototype-chains/">itt</a></li>
+              <li>Privát műveleteket ennél egy fokkal még tisztábban is megadhatunk, lásd a "clojures" témát.</li>
+						</aside>
+					</section>
+
+					<section>
+						<h2>Javascript I.: <em>extras</em></h2>
+						<p>Closures</p>
+<pre><code>var javascript = (function() {
+	return {
+	  influences: ['C', 'Java', 'Scheme'],
+	  designer: 'Brendan Eich',
+	  created: new Date(1995, 0, 1)
+	};
+})();</code></pre>
+            <p>JSON <code>{}</code></p>
+            <p>Modulok</p>
+					<aside class="notes">
+            <li>miben más a fenti closure, egy sima függvény/constuctorhoz képest?</li>
+            <li class="hf">Írj egy objektumot (függvényt) a fibonacci sor adott elemének számítására, ami rendelkezik privát és publikus műveletekkel és változókkal is. Magyarázd el, hogy mit csinálnak az egyes részek.</li>
+            <li class="hf">A <a href="http://backbonejs.org">Backbone.js</a> kódját tanulmányozni, vannak róla cikkek is (pl: DailyJS-en). Érts meg a privát/publikus részeket.</li>
+            <li>JSON.stringify, JSON.parse</li>
+            <li>A valódi modulok az ES6-ban jönnek, de erről még később lesz szó</li>
+					</aside>
+					</section>
+
+          <section>
+            <h2>Javascript I.: The Future</h2>
+            <ul>
+              <li>ES6: Modulok, új nyelvi elemek</li>
+              <li>Ajánlott olvasnivaló: <a href="http://dailyjs.com/2012/08/20/js101-the-language/">DailyJS cikk</a> és onnan tovább</li>
+            </ul>
+          </section>
+				</section>
+				
+				<section>
+					<h1>Jövő hétre</h1>
+					<div id="hf-out"></div>
+          <aside class="notes">
+            Jövő héten a különböző JS library-kat fogjuk venni:
+            <ul>
+              <li>jQuery</li>
+              <li>Underscore</li>
+              <li>Backbone</li>
+              <li>RequireJS</li>
+            </ul>
+          </aside>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+		<script type="text/javascript" src="js/puli-hf.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/extract/extract.js', async: true, condition: function() { return true; }},
+					{ src: 'plugin/toc/toc.js', async: false, condition: function() { return true; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
