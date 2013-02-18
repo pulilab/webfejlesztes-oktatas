@@ -1,186 +1,279 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
 
-		<title>3. alkalom - Webfejlesztés a gyakorlatban</title>
+    <title>3. alkalom - Webfejlesztés a gyakorlatban</title>
 
-		<meta name="description" content="A 2012/2013 tavaszi félévben tartott Webfejlesztés a gyakorlatban kurzus előadásvázlata">
-		<meta name="author" content="Viktor Nagy">
+    <meta name="description" content="A 2012/2013 tavaszi félévben tartott Webfejlesztés a gyakorlatban kurzus előadásvázlata">
+    <meta name="author" content="Viktor Nagy">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/pulilab.css" id="theme">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/pulilab.css" id="theme">
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
-		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-		</script>
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
 
-	<body>
+  <body>
 
-		<div class="reveal">
+    <div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
 
-				<section>
-					<h1>Webfejlesztés a gyakorlatban</h1>
-					<h3>A tesztírás alapjai</h3>
-					<p>
-						<small><a href="mailto:v@pulilab.com">Viktor Nagy</a>, <a href="http://pulilab.com">Pulilab Kft.</a>, <a href="http://pulilab.github.com/webfejlesztes-oktatas/">Honlap</a></small>
-					</p>
-				</section>
+        <section>
+          <h1>Webfejlesztés a gyakorlatban</h1>
+          <h3>A tesztírás alapjai</h3>
+          <p>
+            <small><a href="mailto:v@pulilab.com">Viktor Nagy</a>, <a href="http://pulilab.com">Pulilab Kft.</a>, <a href="http://pulilab.github.com/webfejlesztes-oktatas/">Honlap</a></small>
+          </p>
+        </section>
 
-				<section>
-					<section>
-						<h2>A tesztelésről</h2>
-						<h3>Mi egy teszt?</h3>
-						<p class="fragment">Egy olyan program, ami egy másik program működését ellenőrzi.</p>
-						<aside class="notes">
-						</aside>
-					</section>
+        <section>
+          <section>
+            <h2>A tesztelésről</h2>
+            <h3>Mi egy teszt?</h3>
+            <p class="fragment">Egy olyan program, ami egy másik program működését ellenőrzi.</p>
+            <aside class="notes">
+            </aside>
+          </section>
 
-					<section>
-						<h2>A tesztelésről</h2>
-						<h3>Mire jó a tesztelés?</h3>
-						<ul>
-							<li>Egyes kódrészek megfelelően futnak le - unit</li>
-							<li class="fragment">Több kódrész megfelelően illeszkedik egymáshoz - integration</li>
-							<li class="fragment">Az alkalmazás kimenete az, amit szeretnénk - end2end/functional</li>
-						</ul>
-						<aside class="notes">
-							<li>a tesztek fajtái is itt vannak</li>
-							<li>unit tests - erről lesz leginkább szó</li>
-							<li>integration tests</li>
-							<li>end2end/functional tests</li>
-							<li>mindben más eszközök segítenek, más szemléletet igényelnek</li>
-						</aside>
-					</section>
+          <section>
+            <h2>A tesztelésről</h2>
+            <h3>Mire jó a tesztelés?</h3>
+            <ul>
+              <li>Egyes kódrészek megfelelően futnak le - unit</li>
+              <li class="fragment">Több kódrész megfelelően illeszkedik egymáshoz - integration</li>
+              <li class="fragment">Az alkalmazás kimenete az, amit szeretnénk - end2end/functional</li>
+            </ul>
+            <aside class="notes">
+              <li>a tesztek fajtái is itt vannak</li>
+              <li>unit tests - erről lesz leginkább szó</li>
+              <li>integration tests</li>
+              <li>end2end/functional tests</li>
+              <li>mindben más eszközök segítenek, más szemléletet igényelnek</li>
+            </aside>
+          </section>
 
-					<section>
-						<h2>A tesztelésről</h2>
-						<h3>Mire jó? <a href="/webdev/examples3/">Példák</a></h3>
-					</section>
+          <section>
+            <h2>Hogyan teszteljünk</h2>
+            <h3>Alapelvek</h3>
+            <ul>
+              <li>Atomikus tesztek: a lehető legkisebb kódrészt teszteld</li>
+              <li class="fragment">A saját kódot teszteld, ne a segédkönyvtárakat</li>
+              <li class="fragment"> ... folyt köv ... </li>
+            </ul>
+          </section>
 
-					<section>
-						<h2>A tesztelésről</h2>
-						<h3>Hogyan teszteljünk?</h3>
-						<p>Test Driven Development</p>
-						<ul>
-							<li class="hf">Írjunk egy fibonacci generátort teszttel együtt!</li>
-						</ul>
-					</section>
-				</section>
+          <section>
+            <h2>A tesztelésről</h2>
+            <h3>Mire jó? <a href="/webdev/examples3/">Példák</a></h3>
+            <aside class="notes">
+              <li>a testing1.html-t nézzük végig</li>
+            </aside>
+          </section>
 
-				<section>
-					<section>
-						<h2>Teszt-rendszerek</h2>
-						<h3>QUnit</h3>
-						static HTML page testing
-					</section>
-					<section>
-						<h2>Teszt-rendszerek</h2>
-						<h3>Jasmine</h3>
-					</section>
-					<section>
-						<h2>Teszt-rendszerek</h2>
-						<h3>Mocha</h3>
-					</section>
-					<section>
-						<h2>Teszt-rendszerek</h2>
-						<h3>PhantomJS (CasperJS)</h3>
-						headless browser
-					</section>
-					<section>
-						<h2>Teszt-rendszerek</h2>
-						<h3>Selenium</h3>
-						browser automation
-					</section>
-					<section>
-						<h2>Teszt-rendszerek</h2>
-						<h3>Continuous Integration</h3>
-					</section>
-				</section>
+          <section>
+            <h2>A tesztelésről</h2>
+            <h3>Hogyan teszteljünk?</h3>
+            <p>Test Driven Development</p>
+            <ul>
+              <li>Írjunk egy fibonacci generátort teszttel együtt!</li>
+            </ul>
+            <aside class="notes">
+              <li>Cseréljük ki a fibonacci függvényt egy másikra a végén</li>
+              <li class="hf">Írjunk egy fizzbuzzbizz függvényt tesztekkel (1)</li>
+            </aside>
+          </section>
+        </section>
 
-				<section>
-					<section>
-						<h2>Teszt-eszközök</h2>
-						<h3>Mocking</h3>
-						http://sinonjs.org/
-						mockjax
-					</section>
-					<section>
-						<h2>Teszt-eszközök</h2>
-						<h3><a href="https://github.com/airportyh/testem">Testem</a></h3>
-					</section>
-					<section>
-						<h2>Teszt-eszközök</h2>
-						<h3><a href="http://vojtajina.github.com/testacular/">Testacular</a></h3>
-					</section>
-				</section>
+        <section>
+          <section>
+            <h2>Teszt-rendszerek</h2>
+            <h3><a href="http://qunitjs.com/">QUnit</a></h3>
+            <ul>
+              <li>Statikus HTML oldalba ágyazott teszt</li>
+              <li>Nagyon könnyen használható</li>
+              <li>Különösen függvénykönyvtárak (library) tesztelésére ajánlott</li>
+              <li>Alapból csak modulokat, teszhívásokat (async és sync) és assertionöket tartalmaz</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Teszt-rendszerek</h2>
+            <h3><a href="http://pivotal.github.com/jasmine/">Jasmine</a></h3>
+            <ul>
+              <li>Statikus HTML oldalba ágyazott teszt, de futtatható parancssorból is</li>
+              <li>Különösen függvénykönyvtárak (library) tesztelésére ajánlott</li>
+              <li>rendelkezik valódi setUp és tearDown hívásokkal</li>
+              <li>Alapból ad mockot, spy-t, stubot, stb</li>
+              <li>BDD = egy kicsit emberközelib a szintaktikája</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Teszt-rendszerek</h2>
+            <h3>Mocha</h3>
+            <li>Elsősorban szerveroldali tesztelésre, de futtatható statikus HTML oldalban is</li>
+            <li>Ez a legrugalmasabb, egyúttal a legtöbb macerát igényli az elindulás</li>
+          </section>
+          <section>
+            <h2>Teszt-rendszerek</h2>
+            <h3>PhantomJS (<a href="http://casperjs.org/">CasperJS</a>)</h3>
+            <ul>
+              <li>A chromium böngésző ablak nélkül (chromeless chrome)</li>
+              <li>Ajánlott end2end / functional teszteléshez</li>
+            </ul>
+            <aside class="notes">
+              <li>Olyan mintha a tesztedet egy láthatatlan böngészőben futtatnád</li>
+              <li class="hf">A fizzbuzzbizz könyvtárhoz írj egy html oldalt, ami megjeleníti a számokat 1-100-ig, ezt teszteld le CasperJS-szel (1)</li>
+              <li class="hf">Cikkírás a teljes fizzbuzzbizz tesztelésről (1)</li>
+            </aside>  
+          </section>
+          <section>
+            <h2>Teszt-rendszerek</h2>
+            <h3>Selenium / Webdriver</h3>
+            <li>Browser automation - indít egy böngészőt és azt használja</li>
+            <li>Nem csak chrome (vö. PhantomJS)</li>
+            <li>Ajánlott end2end / functional teszteléshez</li>
+            <li>Java/Python teszteket futtat, készül a JS driver</li>
+          </section>
+          <section>
+            <h2>Teszt-rendszerek</h2>
+            <h3>Continuous Integration</h3>
+            <ul>
+              <li>A lényege, hogy automatikusan futtatja a tesztjeidet, amikor a kódot beküldöd a repoba</li>
+              <li class="fragment">Travis</li>
+              <li class="fragment">Jenkins</li>
+              <li class="fragment">Hudson</li>
+              <li class="fragment">...</li>
+            </ul>
+          </section>
+        </section>
 
-				<section>
-					<section>
-						<h2>Hogyan teszteljünk</h2>
-						<h3>Alapelvek</h3>
-					</section>
-					<section>
-						<h2>Hogyan teszteljünk</h2>
-						<h3>Példák</h3>
-					</section>
-				</section>
+        <section>
+          <section>
+            <h2>Teszt-eszközök</h2>
+            <h3>Mocking</h3>
+            <ul>
+              <li><a href="http://sinonjs.org/">Sinon JS</a></li>
+              <li class="fragment"><a href="">mockjax</a></li>
+              <li class="fragment">Ezek könnyen összeakadnak</li>
+            </ul>
+            <aside class="notes">
+              <li>SinonJS: Mock, Spy, Stub, Timer, XMLHttpRequest</li>
+              <li>Mockjax: a jQuery.ajax hívásához ad mock eredményt, nagyon könnyen használható</li>
+            </aside>
+          </section>
+          <section>
+            <h2>Teszt-eszközök</h2>
+            <h3><a href="https://github.com/airportyh/testem">Testem</a></h3>
+          </section>
+          <section>
+            <h2>Teszt-eszközök</h2>
+            <h3><a href="http://vojtajina.github.com/testacular/">Testacular</a></h3>
+          </section>
+        </section>
 
-				<section>
-					<h1>Jövő hétre</h1>
-					<div id="hf-out"></div>
-				</section>
+        <section>
+          <section>
+            <h2>Hogyan teszteljünk</h2>
+            <h3>Alapelvek</h3>
+            <ul>
+              <li>Atomikus tesztek: a lehető legkisebb kódrészt teszteld</li>
+              <li class="fragment">A saját kódot teszteld, ne a segédkönyvtárakat</li>
+              <li class="fragment">Az ajax hívásokat <strong>mindig</strong> mock-old</li>
+              <li class="fragment">A segédkönyvtárakat mock-old/spy-old/stub-old</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Hogyan teszteljünk</h2>
+            <h3>Példák</h3>
+            <ul>
+              <li>A weather.com-on keresünk egy irányítószámra, és kiírjük az adatait. <a href="/webdev/examples3/weather_example.html">Példa</a></li>
+            </ul>
+            <aside class="notes">
+              <li class="hf">A last.fm-en keresünk egy énekes nevére, majd kattintással választunk a találatok közül. A kiválasztott énekes minden adatát kiírjük. (3)</li>
+              <li class="hf">Cikkírás a last.fm-es tesztről (2)</li>
+            </aside>
+          </section>
+        </section>
 
-			</div>
+        <section>
+          <h1>Jövő hétre</h1>
+          <div id="hf-out">
+            <li>Jasmine tesztek + pontot érnek (fbb: 1, lastfm: 2)</li>
+          </div>
+          <aside class="notes">
+            <li>Van még egy kis segítség a következő oldalakon!</li>
+          </aside>
+        </section>
 
-		</div>
+        <section>
+          <h1>FizzBuzzBizz</h1>
+          <ul>
+            <li>Ha a szám 3-mal osztható: fizz</li>
+            <li>Ha a szám 5-tel osztható: buzz</li>
+            <li>Ha a szám 7-tel osztható: bizz</li>
+            <li>Ha a szám 3-mal és 5-tel osztható: fizzbuzz</li>
+            <li>...</li>
+            <li>Egyébként: &lt;szám&gt;</li>
+          </ul>
+        </section>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
-		<script type="text/javascript" src="js/puli-hf.js"></script>
+        <section>
+          <h2>Helyi szerver futtatása</h2>
+          A következő parancs a <code>8080</code>as porton elindít egy statikus szervert az aktuális könyvtárad fájljaival.
+          <pre><code>$ python -m SimpleHTTPServer 8080</code></pre>
+          A parancs kiadása után nyisd meg a <a href="http://localhost:8080">http://localhost:8080</a> oldalt.
+        </section>
 
-		<script>
+      </div>
 
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
+    </div>
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script type="text/javascript" src="js/puli-hf.js"></script>
 
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/extract/extract.js', async: true, condition: function() { return true; } },
-					{ src: 'plugin/toc/toc.js', async: false, condition: function() { return true; } }
-				]
-			});
+    <script>
 
-		</script>
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
 
-	</body>
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/extract/extract.js', async: true, condition: function() { return true; } },
+          { src: 'plugin/toc/toc.js', async: false, condition: function() { return true; } }
+        ]
+      });
+
+    </script>
+
+  </body>
 </html>

@@ -3,11 +3,17 @@ $().ready ->
     
   module "Bulitesztek"
   test "1===1.0", ->
-      equal(1.1, 1)
+    equal(1.1, 1)
 
   module "Osztály szintű sayHello"
   test "Minden név kikerül", ->
-        equal(1,1)
+    firstLi = container.children[0]
+    equal(firstLi.innerHTML, "Hello Viktor, Ricsi")
+
+  module "Instance szintű sayHello"
+  test "Az adott név kikerül", ->
+    secondLi = container.children[1]
+    equal(secondLi.innerHTML, "Szia Ricsi!")
 
 #$(document).ready(function(){
     #module("BPM Query Parts")

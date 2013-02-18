@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="hu">
+
+	<head>
+		<meta charset="utf-8">
+	<title>Tesztelés példa 2</title>
+	<link rel="stylesheet" href="css/qunit.css" type="text/css" media="screen" />
+</head>
+<body>
+	<h1 id="qunit-header">Fibonacci teszt</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<form>
+		<input id="location" type="text">
+		<button type="submit" id="search">Search location</button>
+		<button type="submit" id="submit">Get weather</button>
+	</form>
+	<div id="container"></div>
+	<img src="http://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="200">
+	<script type="text/javascript" src="libs/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="libs/lodash.min.js"></script>
+	<script type="text/javascript" src="js/weather.js"></script>
+	<script type="text/javascript">
+	Weather.key = "20d68f981afc4659";
+	var container = document.getElementById('container');
+	var input = $('#location');
+	function resetContainer() {
+		container.innerHTML = '';
+	}
+	function showLocations( data ) {
+		_.each(data.RESULTS, function(loc) {
+			var p = document.createElement('p');
+			p.innerHTML = loc.name + ': ' + loc.l;
+			container.appendChild(p);
+		})
+	}
+	function showWeather( data ) {
+		_.each(data.forecast.simpleforecast.forecastday, function(fc) {
+			var h2 = document.createElement('h2');
+			h2.innerHTML = fc.date.weekday + fc.date.year + fc.date.month + fc.date.day;
+			var p = document.createElement('p');
+			p.innerHTML = fc.conditions;
+			var img = document.createElement('img');
+			img.src = fc.icon_url;
+			container.appendChild(h2);
+			container.appendChild(p);
+			container.appendChild(img);
+		})
+	}
+	$('#search').click(function(ev){
+		ev.preventDefault();
+		Weather.getLocation( input.val(), showLocations );
+	});
+	$('#submit').click(function(ev){
+		ev.preventDefault();
+		Weather.getWeather( input.val(), showWeather );
+	});
+	</script>
+</body>
+</html>

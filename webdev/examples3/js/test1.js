@@ -4,20 +4,19 @@
 
   Name = (function() {
 
+    Name.container = document.getElementById('container');
+
     Name.names = [];
 
     Name.sayHello = function() {
-      var name;
-      return console.log('Hello ' + ((function() {
-        var _i, _len, _ref, _results;
-        _ref = this.names;
-        _results = [];
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          name = _ref[_i];
-          _results.push(name);
-        }
-        return _results;
-      }).call(this)));
+      return this.addToDom('Hello ' + this.names.join(','));
+    };
+
+    Name.addToDom = function(txt) {
+      var newLi;
+      newLi = document.createElement('li');
+      newLi.innerHTML = txt;
+      return Name.container.appendChild(newLi);
     };
 
     function Name(name) {
@@ -26,7 +25,7 @@
     }
 
     Name.prototype.sayHello = function() {
-      return console.log("Szia " + this.name);
+      return Name.addToDom("Szia " + this.name);
     };
 
     return Name;

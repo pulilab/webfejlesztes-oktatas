@@ -9,8 +9,16 @@
       return equal(1.1, 1);
     });
     module("Osztály szintű sayHello");
-    return test("Minden név kikerül", function() {
-      return equal(1, 1);
+    test("Minden név kikerül", function() {
+      var firstLi;
+      firstLi = container.children[0];
+      return equal(firstLi.innerHTML, "Hello Viktor, Ricsi");
+    });
+    module("Instance szintű sayHello");
+    return test("Az adott név kikerül", function() {
+      var secondLi;
+      secondLi = container.children[1];
+      return equal(secondLi.innerHTML, "Szia Ricsi!");
     });
   });
 
