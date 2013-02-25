@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>4. alkalom - Webfejlesztés a gyakorlatban</title>
+
+    <meta name="description" content="A 2012/2013 tavaszi félévben tartott Webfejlesztés a gyakorlatban kurzus előadásvázlata">
+    <meta name="author" content="Viktor Nagy">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/pulilab.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section>
+          <h1>Webfejlesztés a gyakorlatban</h1>
+          <h3>JS rendszerek</h3>
+          <p>
+            <small><a href="mailto:v@pulilab.com">Viktor Nagy</a>, <a href="http://pulilab.com">Pulilab Kft.</a>, <a href="http://pulilab.github.com/webfejlesztes-oktatas/">Honlap</a></small>
+          </p>
+        </section>
+
+        <section>
+          <section>
+            <h2><a href="http://jquery.com">jQuery</a></h2>
+            <pre class="fragment fade-out hide"><code>$().ready(function(){
+  // onload handler code
+  $('#myId').click(function(ev){
+    // event handler
+  });
+});
+            </code></pre>
+            <ul class="fragment">
+              <li><a href="http://sizzlejs.com/">Sizzle</a> CSS selector</li>
+              <li>Ajax</li>
+              <li>Deferred</li>
+              <li>Efektek / Effects</li>
+              <li>DOM Manipulálás</li>
+              <li>Pluginok</li>
+              <li class="fragment">láncba fűzhető:
+                <pre><code>$('#myelem').click().hide();</code></pre></li>
+            </ul>
+            <aside class="notes">
+              <li>Ezek kifejtésre kerülnek a következő oldalakon</li>
+            </aside>
+          </section>
+          <section>
+            <h2>jQuery</h2>
+            <h3>Ajax</h3>
+            <pre><code>$.ajax({
+  url: 'http://dummyapi.bpm-radio-playlist.appspot.com/api/tree/?sitekey=1234',
+  type: "GET",
+  success: console.log
+});
+$.get('http://dummyapi.bpm-radio-playlist.appspot.com/api/tree/?sitekey=1234', console.log);
+</code></pre>
+          <aside class="notes">
+            <li>saját xhr objektum, néhány extra művelettel</li>
+            <li>több shorthand művelete is van, a $.ajax a legáltalánosabb</li>
+            <li>egy kis szöveg a jsonp-ről, elsősorban crossdomainhez</li>
+            <li>a $.ajax egy deferred-et ad vissza</li>
+          </aside>
+          </section>
+          <section>
+            <h2>jQuery</h2>
+            <h3>Deferred/Promise</h3>
+            <pre class="fragment fade-out hide"><code>var defd = $.ajax({});
+  defd.then(function(data){
+    console.log(data);
+  });
+            </code></pre>
+            <pre class="fragment"><code>var defd = new $.Deferred();
+  defd.then(function(data){
+    console.log(data); //-> 'hello';
+  });
+  defd.resolve('hello');
+            </code></pre>
+            <ul>
+              <li class="fragment">Nem csak jQuery létezik. pl: <a href="https://github.com/cujojs/when">when.js</a></li>
+            </ul>
+            <aside class="notes">
+              <li>a deferred lényege a javascript erősségére építeni, a callback-ekre</li>
+              <li>gyakran nem a függvény visszatérési értéke számít, mert async a hívás</li>
+              <li>a deferred-del egy async hívás valódi eredményéhez tudunk további feladatokat csatolni</li>
+            </aside>
+          </section>
+
+          <section>
+            <h2>jQuery</h2>
+            <h3>effektek</h3>
+            <ul>
+              <li>toggle = hide / show</li>
+              <li>fadeToggle = fadeIn / fadeOut</li>
+              <li>$.fx</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>jQuery</h2>
+            <h3>DOM Manipulálás</h3>
+            <ul>
+              <li>$.clone</li>
+              <li>$.before, $.after</li>
+              <li>$.append, $.insert</li>
+              <li>$.remove</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>jQuery</h2>
+            <h3><a href="http://plugins.jquery.com/">pluginok</a></h3>
+            <p>Ez az igazi erőssége</p>
+            <ul>
+              <li>Könnyen írható</li>
+              <li>Sok létező plugin</li>
+            </ul>
+            <aside class="notes">
+              <li>tanulmányozzuk át egy plugin felépítését, <a href="http://learn.jquery.com/plugins/basic-plugin-creation/">itt az alap doksi</a></li>
+              <li class="hf">Írj egy last.fm jquery plugint előadok adatainak kereséséhez.</li>
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2><a href="http://jqueryui.com/">jQuery UI</a></h2>
+            <ul>
+              <li>Alapból ad különféle UI elemeket</li>
+              <li>Alapból ad egy Widget osztályt</li>
+              <li class="fragment">A Widget-tel mi is írhatunk UI elemeket</li>
+            </ul>
+            <aside class="notes">
+              <li>tanulmányozzuk a widget osztályt, <a href="http://learn.jquery.com/plugins/stateful-plugins-with-widget-factory/">itt a doksi</a></li>
+              <li class="hf">Írj egy autocompletion widgetet, ami a találatokat nem egy "legördülő" listában jeleníti meg, hanem a DOM-ba ágyazva.</li>
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Single Page App</h2>
+            <h3><a href="http://backbonejs.org/">Backbone.js</a></h3>
+            <ul>
+              <li>Igényli: jQuery vagy zepto</li>
+              <li>és <a href="http://underscorejs.org/">Underscore.js</a></li>
+              <li class="fragment">egy egyszerű Model View Controller(/Router) könyvtár</li>
+              <li class="fragment">sok kiegészítés létezik hozzá: Backbone.Marionette, Backbone.Relational, Backbone.localStorage, ...</li>
+            </ul>
+            <aside class="notes">
+              <li>DailyJS cikkek: <a href="http://dailyjs.com/2012/07/19/mvstar-2/">1</a>, <a href="http://dailyjs.com/2012/08/16/mvstar-6/">2</a>, <a href="http://dailyjs.com/2012/11/29/backbone-tutorial-1/">teljes tutorial</a>, <a href="http://addyosmani.github.com/backbone-fundamentals/ ">Tips&amp;Tricks</a></li>
+            </aside>
+          </section>
+          <section>
+            <h2>Single Page App</h2>
+            <h3><a href="http://handlebarsjs.com/">Handlebars</a></h3>
+            <ul>
+              <li>sablonkezelés js alatt</li>
+              <li>egyszerű logika a kódban</li>
+              <li>partial-ok</li>
+              <li>helper-ek</li>
+            </ul>
+<pre><code>var tmpl = $('#myTemplate').html();
+var compiled = Handlebars.compile(tmpl);
+$('#output').html( compiled({key: value}) );
+</code></pre>
+          </section>
+          <section>
+            <h2>Single Page App</h2>
+            <h3>További library-k</h3>
+            <ul>
+              <li>Angular JS</li>
+              <li>Ember JS</li>
+              <li>Flight</li>
+              <li>...</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <h1>Jövő hétre</h1>
+          <div id="hf-out">
+            <li>Elvárás: tesztek, ajax hívások mockolása.</li>
+            <li>Extra pont: cikk a feladat megvalósításáról.</li>
+          </div>
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <section>
+          <h1>Last.fm plugin</h1>
+          <ul>
+            <li>A keresőmezőben az előadó nevére lehet keresni</li>
+            <li>A találati listából lehet előadót választani</li>
+            <li>A kiválasztott előadó minden adatatát megjeleníti</li>
+            <li>Extra pont: a kiválasztott előadó adatait localStorage-ban lemented, és legközelebb ugyanazt az előadót már nem tölti le</li>
+            <li>Eszközök: qUnit, mockjax; opcionális: Backbone, Handlebars</li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>jQuery UI</h1>
+          <h2> Autocompletion Widget</h2>
+          <ul>
+            <li>ki szabad indulni a létező autocompletion kódból</li>
+            <li>a használata a pluginnak legyen a következő: 
+<pre><code>$('#searchInput').myComplete({
+  target: $('#results'), 
+  targetHandler: function(data){},
+  ...
+})</code></pre></li>
+            <li>3 karakter után induljon a keresés (állítható)</li>
+            <li>a keresőfüggvényt a beállítások közt lehessen definiálni vagy csak url-t megadni</li>
+            <li>az eredmények megjelenítését a targetHandler végzi</li>
+            <li>a plugin működését a last.fm API használatával mutasd is be</li>
+          </ul>
+        </section>
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script type="text/javascript" src="js/puli-hf.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/extract/extract.js', async: true, condition: function() { return true; } },
+          { src: 'plugin/toc/toc.js', async: false, condition: function() { return true; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
