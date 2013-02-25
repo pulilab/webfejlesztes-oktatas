@@ -9,7 +9,7 @@
     Name.names = [];
 
     Name.sayHello = function() {
-      return this.addToDom('Hello ' + this.names.join(','));
+      return this.addToDom('Hello ' + this.names.join(', '));
     };
 
     Name.addToDom = function(txt) {
@@ -25,7 +25,7 @@
     }
 
     Name.prototype.sayHello = function() {
-      return Name.addToDom("Szia " + this.name);
+      return Name.addToDom("Szia " + this.name + '!');
     };
 
     return Name;

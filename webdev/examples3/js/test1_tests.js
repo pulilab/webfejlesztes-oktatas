@@ -3,10 +3,10 @@
 
   $().ready(function() {
     var container;
-    container = $("#container");
+    container = document.getElementById('container');
     module("Bulitesztek");
     test("1===1.0", function() {
-      return equal(1.1, 1);
+      return equal(1, 1);
     });
     module("Osztály szintű sayHello");
     test("Minden név kikerül", function() {
