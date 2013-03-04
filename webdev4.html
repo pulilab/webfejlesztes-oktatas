@@ -162,6 +162,49 @@ $.get('http://dummyapi.bpm-radio-playlist.appspot.com/api/tree/?sitekey=1234', c
         <section>
           <section>
             <h2>Single Page App</h2>
+            <h3>Mi is ez?</h3>
+            <ul>
+              <li>Erre haladnak a fejlesztések. Sokszor nem is vagyunk tudatában, hogy használjuk</li>
+              <li>Lényege: klasszikus (szinkron) http lekérést csak az oldal első betöltésekor végzünk</li>
+              <li class="fragment">Utána az aktuális oldal tartalmát frissítjük a kliens oldalon belülről (JavaScripttel)</li>
+              <li class="fragment">Példa 1: Soundcloud: akármerre navigálok, a zene folyamatosan hallatszik</li>
+              <li class="fragment">Példa 2: Facebook: chat</li>
+              <li class="fragment">Példa 3: GMail</li>
+            </ul>
+            <aside class="notes">
+              <li>egyre inkább erre van szükség: egy alkalmazás fut a böngészőben</li>
+            </aside>
+          </section>
+          <section>
+            <h2>Single Page App</h2>
+            <h3>Miben más a klasszikus oldaltól?</h3>
+            <ul>
+              <li>API-kon keresztül kommunikál a szerverrel, néha pjax</li>
+              <li class="fragment">a szerver helyett a böngésző rendereli az oldalt</li>
+              <li class="fragment">ergo egy teljes controller fut a böngészőben</li>
+              <li class="fragment">nehézségek: 
+                <dl>
+                  <dt class="fragment">deep linking</dt>
+                  <dd class="fragment">megoldás: routing és state machine</dd>
+                  <dt class="fragment">sok adat</dt>
+                  <dd class="fragment">megoldás: model layer</dd>
+                  <dt class="fragment">interaktivitás</dt>
+                  <dd class="fragment">megoldás: two-way data binding</dd>
+                </dl>
+              </li>
+            </ul>
+            <aside class="notes">
+              <li>API Vs Session:
+                <ul>
+                  <li>nincs session, nincs bejelentkezett felhasználó = stateless</li>
+                  <li>HTML helyett JSON vagy JSONP</li>
+                  <li>új nehézségek, pl: throttling</li>
+                </ul>
+              </li>
+            </aside>
+          </section>
+          <section>
+            <h2>Single Page App</h2>
             <h3><a href="http://backbonejs.org/">Backbone.js</a></h3>
             <ul>
               <li>Igényli: jQuery vagy zepto</li>
@@ -171,6 +214,7 @@ $.get('http://dummyapi.bpm-radio-playlist.appspot.com/api/tree/?sitekey=1234', c
             </ul>
             <aside class="notes">
               <li>DailyJS cikkek: <a href="http://dailyjs.com/2012/07/19/mvstar-2/">1</a>, <a href="http://dailyjs.com/2012/08/16/mvstar-6/">2</a>, <a href="http://dailyjs.com/2012/11/29/backbone-tutorial-1/">teljes tutorial</a>, <a href="http://addyosmani.github.com/backbone-fundamentals/ ">Tips&amp;Tricks</a></li>
+              <li class="hf">A tutorialt végigcsinálni (a te érdeked, hogy ne csak copy-pastelj)</li>
             </aside>
           </section>
           <section>
@@ -186,16 +230,20 @@ $.get('http://dummyapi.bpm-radio-playlist.appspot.com/api/tree/?sitekey=1234', c
 var compiled = Handlebars.compile(tmpl);
 $('#output').html( compiled({key: value}) );
 </code></pre>
+            <aside class="notes">
+              <li>Írj egy alkalmazást: Backbone + Handlebars, aminek van lista és részletes nézete. (pl: mint az <a href="http://angular.github.com/angular-phonecat/step-11/app/#/phones">angular</a> <a href="http://docs.angularjs.org/tutorial/">tutorial</a>)</li>
+            </aside>
           </section>
           <section>
             <h2>Single Page App</h2>
             <h3>További library-k</h3>
             <ul>
-              <li>Angular JS</li>
-              <li>Ember JS</li>
-              <li>Flight</li>
+              <li><a href="http://angularjs.org/">Angular JS</a></li>
+              <li><a href="http://emberjs.com/">Ember JS</a></li>
+              <li><a href="http://twitter.github.com/flight/">Flight</a></li>
               <li>...</li>
             </ul>
+            <a class="fragment" href="http://todomvc.com/">TodoMVC</a>
           </section>
         </section>
 
