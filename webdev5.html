@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>5. alkalom - Webfejlesztés a gyakorlatban</title>
+
+    <meta name="description" content="A 2012/2013 tavaszi félévben tartott Webfejlesztés a gyakorlatban kurzus előadásvázlata">
+    <meta name="author" content="Viktor Nagy">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/pulilab.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section>
+          <h1>Webfejlesztés a gyakorlatban</h1>
+          <h3>Apróbb eszközök</h3>
+          <p>
+            <small><a href="mailto:v@pulilab.com">Viktor Nagy</a>, <a href="http://pulilab.com">Pulilab Kft.</a>, <a href="http://pulilab.github.com/webfejlesztes-oktatas/">Honlap</a></small>
+          </p>
+        </section>
+
+        <section>
+          <section>
+            <h2>AMD / CommonJS</h2>
+            <h3>Modulok JS-ben</h3>
+            <ul>
+              <li>A moduláris kód könnyebben karbantartható, átlátható</li>
+              <li>A modulok közt függőségek lehetnek</li>
+              <li>CommonJS: szabványok teljesértékű Js fejlesztéshez; ez ad egy Modul szabványt</li>
+              <li>AMD: Asynchronous Module Definition, kifejezetten böngészőre kitalálva</li>
+              <li><a href="http://requirejs.org/docs/whyamd.html">Részletek az AMD-ről és CommonJSről</a></li>
+            </ul>
+          </section>
+          <section>
+            <h2>Minták</h2>
+            <p>CommonJS</p>
+            <pre><code>var $ = require('jquery');
+exports.myExample = function () {};</code></pre>
+            <p>AMD</p>
+            <pre><code>define(['jquery'] , function ($) {
+    return function () {};
+});</code></pre>
+            <p>Jelentésük</p>
+            <ul>
+              <li>Függ a "jquery"-től, amit a "$" változóban lehet majd elérni.</li>
+            </ul>
+          </section>
+          <section>
+            <h2>AMD implementációk</h2>
+            <ul>
+              <li>Require JS</li>
+              <li>Almond JS</li>
+            </ul>
+          </section>
+          <section>
+            <h2>RequireJS példa</h2>
+            <h3>TodoMVC</h3>
+            <a href="http://todomvc.com/dependency-examples/backbone_require/">Backbone+RequireJS</a>
+          </section>
+        </section>
+
+        <section>
+          <section><h2>Csomagkezelő</h2>
+            <dl>
+              <dt>Probléma</dt>
+              <dl>Egyre több külső JS fájlt használ a projektem, ezeket adott verzión szeretnén könnyen biztosítani</dl>
+            </dl>
+            <p class="fragment">Több lehetőség van. Ajánlott <a href="http://twitter.github.com/bower/">Bower</a><br>
+              A "components" könyvtárba tölti le az egyes JS könyvtárakat. Innen kell ezeket továbblinkelni/betölteni.
+            </p>
+          </section>
+          <section>
+            <h2>Csomagkezelő</h2>
+            <h3>npm</h3>
+            <p>Az `npm` a "node package manager" rövidítése. Ez egy általános js csomagkezelő, nem kifejezetten frontend fejlesztéshez.</p>
+            <aside class="notes">
+              <li>a következő alkalommal részletesebben is lesz róla szó</li>
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Build tools</h2>
+            <h3>Kell ilyen?</h3>
+            <a href="http://gruntjs.com/">Grunt</a>
+            <p class="fragment">
+              <a href="https://github.com/testdouble/lineman">Lineman</a>, <a href="http://yeoman.io/">Yeoman</a>
+            </p>
+            <aside class="notes">
+              <li>Miért kell build tool?
+                <ul>
+                  <li>less -> css</li>
+                  <li>coffee -> js</li>
+                  <li>minify js, minify css</li>
+                  <li>autorun tests</li>
+                </ul>
+              </li>
+              <li class="hf">Állíts össze egy grunt konfigot a következő műveletekkel:
+                <ul>
+                  <li>watch: figyeli a js, html és css fileokat és lefuttatja a build műveletet minden mentéskor</li>
+                  <li>build: r.js-szel optimalizálja és összefűzi a js fájljaidat, a handlebars sablonokat JST fájlba fordítja, a kész fájlokat egy külön könyvtárszerkezetbe rakja át</li>
+                  <li>test: figyeli a js és test js fájlokat, minden mentéskor először jslintel, majd lefuttatja a teszteket (pl: Testem)</li>
+                </ul>
+              </li>
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <h1>Jövő hétre</h1>
+          <div id="hf-out">
+          </div>
+          <aside class="notes">
+          </aside>
+        </section>
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script type="text/javascript" src="js/puli-hf.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/extract/extract.js', async: true, condition: function() { return true; } },
+          { src: 'plugin/toc/toc.js', async: false, condition: function() { return true; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
