@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>7. alkalom - Webfejlesztés a gyakorlatban</title>
+
+    <meta name="description" content="A 2012/2013 tavaszi félévben tartott Webfejlesztés a gyakorlatban kurzus előadásvázlata">
+    <meta name="author" content="Viktor Nagy">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/pulilab.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section>
+          <h1>Webfejlesztés a gyakorlatban</h1>
+          <h3>Django alapok</h3>
+          <p>
+            <small><a href="mailto:v@pulilab.com">Viktor Nagy</a>, <a href="http://pulilab.com">Pulilab Kft.</a>, <a href="http://pulilab.github.com/webfejlesztes-oktatas/">Honlap</a></small>
+          </p>
+        </section>
+
+        <section>
+          <section>
+            <h2>Django</h2>
+            <h3>Mi a Django?</h3>
+            <ul></ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Model réteg</h2>
+            <h3>ORM</h3>
+            <ul>
+              <li>Model</li>
+              <li>ModelManager</li>
+              <li>Signals</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Model réteg</h2>
+            <h3>Model: példa</h3>
+            <pre><code>from django.db import models
+
+class MyModel(models.Model):
+    myfield = models.CharField(max_length=45)
+    myrel = models.ForeignKey(OtherModel)
+
+    def __unicode__(self):
+        return self.myfield
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('mymodel', (), {'pk': self.pk})
+            </code></pre>
+            <aside class="notes">
+              <li>egy my_models táblát hoz létre</li>
+              <li>létrejön egy model manager is: objects</li>
+              <li>gyakori műveletei:
+                <ul>
+                  <li>__unicode__</li>
+                  <li>get_absolute_url</li>
+                </ul>
+              </li>
+              <li>további opciók: Meta</li>
+            </aside>
+          </section>
+          <section>
+            <h2>Model réteg</h2>
+            <h3>Model</h3>
+            <ul>
+              <li>A tábla struktúrája</li>
+              <li>Rekord szintű műveletek</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Model réteg</h2>
+            <h3>ModelManager: példa</h3>
+            <pre><code>
+class VideoManager(models.Manager):
+    use_for_related_fields = True
+
+    def recent(self):
+        return self.get_query_set()
+
+    def by_user(self, user):
+        return self.get_query_set().filter(user=user.get_profile())
+
+
+class PublishedVideoManager(VideoManager):
+
+    def get_query_set(self):
+        return super(PublishedVideoManager, self).get_query_set().filter(project__is_published=True)
+
+class Video(TimeStampedModel):
+    ...
+
+    objects = VideoManager()
+    published = PublishedVideoManager()
+            </code></pre>
+          </section>
+          <section>
+            <h2>Model réteg</h2>
+            <h3>ModelManager</h3>
+            <ul>
+              <li>Tábla szintű műveletek</li>
+              <li>legfontosabb műveletei: 
+                <ul>
+                  <li>get_query_set</li>
+                  <li>get_or_create</li>
+                </ul>
+              </li>
+            </ul>
+            <aside class="notes">
+              <li class="hf">Last.fm-en keresse meg az előadót, ha még nem létezik</li>
+            </aside>
+          </section>
+          <section>
+            <h2>Model réteg</h2>
+            <h3>Signals</h3>
+            <p class="fragment hide">Alapvető probléma: hajtson végre egy műveletet mentés előtt vagy után</p>
+            <ul class="fragment">
+              <li class="frament">save művelet felülírása</li>
+              <li class="frament">pre_save/post_save signal</li>
+              <li class="frament">más alkalmazásokhoz is köthető</li>
+              <li class="fragment">aszinkronná tehető (celery)</li>
+            </ul>
+            <p class="fragment">Nem csak model signal-ok léteznek.</p>
+            <aside class="notes">
+              <li class="hf">Minden új rekord létrehozásakor küldjen egy e-mailt az adminnak</li>
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Egységtesztek</h2>
+            <pre><code>from django.test import TestCase
+
+class ModelTest(TestCase):
+    urls = ['myapp.urls']
+    fixtures = ['testuser.json']
+
+    def setUp(self):
+        pass
+
+    def test_required(self):
+        raise NotImplementedError
+
+class ViewTest(TestCase):
+
+    def test_clien(self):
+        resp = self.client.post('/myendpoint', {'key': 'value'})
+        self.assertEqual(resp.status_code, 201)
+            </code></pre>
+          </section>
+          <section>
+            <h2>Egységtesztek</h2>
+            <h3>Alapok</h3>
+            <pre><code>from django.test import TestCase</code></pre>
+            <ul>
+              <li>fixture betöltése</li>
+              <li>tesztkliens</li>
+              <li>e-mailküldés</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Nézet réteg</h2>
+            <pre><code>from django.http import HttpResponse
+
+def my_view(request, pk):
+    return HttpResponse('OK')
+            </code></pre>
+          </section>
+          <section>
+            <h2>Nézet réteg</h2>
+            <ul>
+              <li>egyszerű requestkezelés</li>
+              <li>válasznak HttpResponse-t vár (vagy annak leszármazottját)</li>
+              <li>sok-sok kiegésztő kapcsolódik ide:
+                <ul>
+                  <li>render_to_response</li>
+                  <li>get_object_or_404</li>
+                  <li>generic views</li>
+                  <li>reverse</li>
+                </ul>
+              </li>
+            </ul>
+            <aside class="notes">
+              <li>request -> response</li>
+              <li>itt van a logika</li>
+              <li>gyakori válasz: sablonból renderelt válasz</li>
+              <li>generic_views</li>
+              <li>reverse és HttpResponseRedirect</li>
+            </aside>
+          </section>
+          <section>
+            <h2>Nézet réteg</h2>
+            <h3>Generikus nézetek: bevezető</h3>
+            <p>Egy általános megközelítés a gyakran ismétlődő feladatokhoz</p>
+          </section>
+          <section>
+            <h2>Nézet réteg</h2>
+            <h3>Osztály-alapú nézetek</h3>
+            <pre><code>def my_view(request):
+    qs = MyModel.objects.filter(user=request.user)
+    return render_to_response('mytemplate.html', {objects: qs})
+
+class MyView(object):
+
+    def __call__(self, request):
+        qs = MyModel.objects.filter(user=request.user)
+        return render_to_response('mytemplate.html', {objects: qs})
+            </code></pre>
+            <ul class="fragment">örökölhető, mixelhető tulajdonságok</ul>
+          </section>
+          <section>
+            <h2>Nézet réteg</h2>
+            <h3>Generikus nézetek</h3>
+            <p>Ezek mind osztály-alapú nézetek</p>
+            <ul>
+              <li>Sablonrenderelés</li>
+              <li>Átirányítás</li>
+              <li>Lista nézet</li>
+              <li>Létrehozás/Módosítás nézet</li>
+              <li>Részletek nézet</li>
+              <li>Dátum alapú nézetek</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Nézet réteg</h2>
+            <h3>Generikus nézetek: példa</h3>
+            <pre><code>class LibraryView(ListView):
+    model = Video
+
+    def get_queryset(self):
+        qs = super(LibraryView, self).get_queryset()
+        return qs.filter(user=self.request.user.get_profile())</code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Sablon réteg</h2>
+            <ul>
+              <li>Saját sablonnyelv (kicsit elavult)</li>
+              <li>Filter: {{valtozo|my_filter}}</li>
+              <li>Template tag: 
+                <ul>
+                  <li>Inline: {% ... %} </li>
+                  <li>Block: {% mytag %}...{% endmytag %}</li>
+                </ul>
+              </li>
+            </ul>
+            <aside class="notes">
+              <li class="hf">Last.fm kereső proxy</li>
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Routing</h2>
+            <ul>
+              <li>regexp alapú</li>
+              <li>URL &lt;-&gt; view megfeleltetés</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Űrlapkezelés</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Middleware réteg</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Admin felület</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Reusable apps</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Auth handler</h2>
+          </section>
+        </section>
+
+        <section>
+          <h1>Jövő hétre</h1>
+          <div id="hf-out">
+            <li>Minden házihoz legyenek egységtesztek!</li>
+          </div>
+          <aside class="notes">
+          </aside>
+        </section>
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script type="text/javascript" src="js/puli-hf.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/extract/extract.js', async: true, condition: function() { return true; } },
+          { src: 'plugin/toc/toc.js', async: false, condition: function() { return true; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
