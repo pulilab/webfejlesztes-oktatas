@@ -12,8 +12,31 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-    <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/pulilab.css" id="theme">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+<!--     <link rel="stylesheet" href="css/theme/pulilab.css" id="theme"> -->
+    <style>
+body::after {
+  position: fixed;
+  bottom: 40px; left: 20px;
+  display: block;
+  width: 201px; height: 48px;
+  background: url('img/pulilab-logo.png') 0 0 no-repeat;
+  content: '';
+}
+header h1{
+  margin-top: 70px;
+  text-align: center;
+}
+.toc-h3 {
+  margin-left: 0px;
+}
+.toc-h4 {
+  margin-left: 10px;
+}
+.toc-h5 {
+  margin-left: 20px;
+}
+    </style>
 
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -28,61 +51,174 @@
     <![endif]-->
   </head>
 
-  <body>
-
-    <div class="reveal">
-
-      <!-- Any section element inside of this container is displayed as a slide -->
-      <div class="slides">
-
-        <section>
-          <h1>Webfejlesztés a gyakorlatban</h1>
-          <h3>Válassz</h3>
-          <ul>
-          <li><a href="webdev1.html">1. alkalom</a></li>
-          <li><a href="webdev2.html">2. alkalom</a></li>
-          <li><a href="webdev3.html">3. alkalom</a></li>
-          <li><a href="webdev4.html">4. alkalom</a></li>
-          <li><a href="webdev5.html">5. alkalom</a></li>
-          <li><a href="webdev6.html">6. alkalom</a></li>
-          <li><a href="webdev7.html">7. alkalom</a></li>
-          <li><a href="webdev8.html">8. alkalom</a></li>
+  <body data-spy="scroll" data-target=".navbar">
+<a name="top"></a>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+      <a class="brand" href="/#top">Webfejlesztés a gyakorlatban</a>
+      <ul class="nav">
+        <li><a href="#eloadasok">Előadások</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle"
+             data-toggle="dropdown"
+             href="#">
+              Projektötletek
+              <b class="caret"></b>
+            </a>
+          <ul class="dropdown-menu">
+            <li><a href="#projekt1">Tagsági alkalmazás</a></li>
           </ul>
-        </section>
+        </li>
+        <li><a href="#kapcsolat">Kapcsolat</a></li>
+      </ul>
       </div>
+    </div>
+  </div>
+  <header class="container">
+    <h1>Webfejlesztés a gyakorlatban</h1>
+  </header>
+  <div class="container">
+    <div class="row">
+      <div class="offset2 span10">
+      <section id="eloadasok">
+        <h2>Előadások</h1>
+        <ul>
+        <li><a href="webdev1.html">1. alkalom</a></li>
+        <li><a href="webdev2.html">2. alkalom</a></li>
+        <li><a href="webdev3.html">3. alkalom</a></li>
+        <li><a href="webdev4.html">4. alkalom</a></li>
+        <li><a href="webdev5.html">5. alkalom</a></li>
+        <li><a href="webdev6.html">6. alkalom</a></li>
+        <li><a href="webdev7.html">7. alkalom</a></li>
+        <li><a href="webdev8.html">8. alkalom</a></li>
+        </ul>
+      </section>
+    
+      <section id="projektek" class="row">
+        <h2>Projektötletek</h2>
+        <div id="projekt1" class="span7">
+        <h3>Tagsági alkalmazás</h3>
+
+<p>A feladatban meg szeretnénk oldani egy jóga egyesület jógázóinak nyilvántartását. Kétféle jógázó van: bérletes és napi jegyes. Az egyes jógaalkalmak elején ezeket regisztrálni kell a rendszerben az esetleges új bérletvásárlásokkal együtt.</p>
+
+<p>A cél egy olyan alkalmazás lefejlesztése, ami internetkapcsolat nélkül mobiltelefonon is el tud futni, de külön kérésre a szerverrel is szinkronizálható.</p>
+
+<h4>Funkciók</h4>
+
+<ul>
+<li>Aktív jógások lekérése a szerverről, kapcsolódó bérletadatokkal együtt. Adatok letárolása a telefonon.</li>
+<li>Jógaórák objektum: egyszerű név (alapértelmezett értékkel)</li>
+<li>Offline módban keresés a jógások közt, hogy az illető részt vett az órán</li>
+<li>Bérletvásárlás regisztrálása offline módban</li>
+<li>Jógán résztvevők és bérletvásárlások feltöltése a szerverre</li>
+</ul>
+
+<h4>Objektumok</h4>
+
+<h5>Bérlet</h5>
+
+<ul>
+<li>tulajdonos</li>
+<li>kezdete</li>
+<li>vége</li>
+<li>fizetett összeg (default=8000)</li>
+</ul>
+
+<h5>Jógázó</h5>
+
+<ul>
+<li>név</li>
+<li>becenév</li>
+<li>e-mailcím</li>
+</ul>
+
+<h5>Jógaóra</h5>
+
+<ul>
+<li>megnevezés
+vagy</li>
+<li>időpont és helyszín</li>
+</ul>
+
+<h5>Jógán résztvevő</h5>
+
+<ul>
+<li>-> Jógaóra</li>
+<li>-> Jógázó</li>
+<li>-> Bérlet (opcionális)      </li>
+<li>fizetett összeg (default=1000)</li>
+</ul>
+
+<h4>Nézetek</h4>
+
+<h5>Jógaóra nézet</h5>
+
+<p>Itt lehet megadni az aktuális óra megnevezését, majd alatta egy auto-complete szöveges mezőben lehet a jógázót kiválasztani vagy új név esetén új jógázót felvenni</p>
+
+<p>Összeg megadása opcionális</p>
+
+<h5>Bérletvásárlás nézet</h5>
+
+<p>Egy auto-complete szöveges mezőben lehet a jógázót kiválasztani vagy új név esetén új jógázót felvenni.</p>
+
+<p>Összeg megadása kötelező</p>
+
+<h5>Szinkronizálás nézet</h5>
+
+<p>Két gomb: lekérjük vagy felküldjük az adatokat</p>
+
+<h4>Technológiák</h4>
+
+<h5>Kliens oldalon</h5>
+
+<ul>
+<li>Localstorage-ban letárolt adatok a mobilon </li>
+<li>PhoneGap/Titanium az alkalmazás környezetéhez (sima webview elegendő)</li>
+</ul>
+
+<h5>Szerver oldalon</h5>
+
+<ul>
+<li>Django + REST framework </li>
+</ul>
+
+<h5>Adatszinkronizálás</h5>
+
+<ul>
+<li>adatkonfliktusra nem kell számítani</li>
+<li>egyszerű GET, POST, PUT műveletek</li>
+<li>csak authentikált felhasználónak érhető el </li>
+</ul>
+        </div>
+        <aside class="span3">
+          <h3>Tartalom</h3>
+          <div id="projekt1-toc" ></div>
+        </aside>
+      </section>        
+
+      <section id="kapcsolat">
+        <h2>Kapcsolat</h2>
+        <ul>
+          <li>Nagy Viktor</li>
+          <li><a href="http://pulilab.com">The Pulilab Kft</a></li>
+        </ul>
+      </section>
+
+      </div>
+    </div>
+
 
     </div>
-<a href="https://github.com/pulilab/webfejlesztes-oktatas"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png" alt="Fork me on GitHub"></a>
-    <script src="lib/js/head.min.js"></script>
-    <script src="js/reveal.min.js"></script>
-    <script type="text/javascript" src="js/puli-hf.js"></script>
-
+<a href="https://github.com/pulilab/webfejlesztes-oktatas"><img style="position: absolute; top: 0; right: 0; border: 0; z-index:1040" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.toc.min.js"></script>
     <script>
-
-      // Full list of configuration options available here:
-      // https://github.com/hakimel/reveal.js#configuration
-      Reveal.initialize({
-        controls: true,
-        progress: true,
-        history: true,
-
-        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
-
-        // Optional libraries used to extend on reveal.js
-        dependencies: [
-          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-          { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-          { src: 'plugin/extract/extract.js', async: true, condition: function() { return true; } },
-          { src: 'plugin/toc/toc.js', async: false, condition: function() { return true; } }
-        ]
-      });
-
+    $('#projekt1-toc').toc({
+      'selectors': 'h3,h4,h5',
+      'container': '#projekt1'
+    })
     </script>
-
   </body>
 </html>
