@@ -47,7 +47,16 @@
           <section>
             <h2>Django</h2>
             <h3>Mi a Django?</h3>
-            <ul></ul>
+            <blockquote>A web development framework for perfectionists with deadlines</blockquote>
+            <p class="fragment">Aktuális verzió: 1.5</p>
+            <p class="fragment">Ingyen hosztolás: Google Appengine, Heroku</p>
+            <p class="fragment">Alternatívák: Pyramid, web2py, ...</p>
+            <aside class="notes">
+              <li>web development framework</li>
+              <li>perfectionists</li>
+              <li>deadlines</li>
+              <li>Appengine, NoSQL</li>
+            </aside>
           </section>
         </section>
 
@@ -60,6 +69,8 @@
               <li>ModelManager</li>
               <li>Signals</li>
             </ul>
+            <p class="fragment">Adatbázis agnosztikus</p>
+            <p class="fragment">Alternatíva: SQLAlchemy</p>
           </section>
           <section>
             <h2>Model réteg</h2>
@@ -151,14 +162,20 @@ class Video(TimeStampedModel):
             </ul>
             <p class="fragment">Nem csak model signal-ok léteznek.</p>
             <aside class="notes">
-              <li class="hf">Minden új rekord létrehozásakor küldjen egy e-mailt az adminnak</li>
+              <li class="hf">Minden új rekord létrehozásakor küldjön egy e-mailt az adminnak</li>
             </aside>
+          </section>
+          <section>
+            <h2>Model réteg</h2>
+            <h3>Migrálás</h3>
+            <p>South</p>
           </section>
         </section>
 
         <section>
           <section>
             <h2>Egységtesztek</h2>
+            <a href="https://docs.djangoproject.com/en/1.4/topics/testing/">Doksi</a>
             <pre><code>from django.test import TestCase
 
 class ModelTest(TestCase):
@@ -168,7 +185,7 @@ class ModelTest(TestCase):
     def setUp(self):
         pass
 
-    def test_required(self):
+    def test_mymethod(self):
         raise NotImplementedError
 
 class ViewTest(TestCase):
@@ -180,6 +197,24 @@ class ViewTest(TestCase):
           </section>
           <section>
             <h2>Egységtesztek</h2>
+            <h3>Mit tesztelünk?</h3>
+            <ul>
+              <li>Csak a saját kódot</li>
+              <li>Alapértelmezett értékeket</li>
+              <li>Minél több futási ágat</li>
+              <li>Atomizáltan:
+                <ol>
+                  <li>ModelManager</li>
+                  <li>Model</li>
+                  <li>Utilities</li>
+                  <li>Middleware</li>
+                  <li>View + Routing</li>
+                </ol>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>Egységtesztek</h2>
             <h3>Alapok</h3>
             <pre><code>from django.test import TestCase</code></pre>
             <ul>
@@ -187,6 +222,13 @@ class ViewTest(TestCase):
               <li>tesztkliens</li>
               <li>e-mailküldés</li>
             </ul>
+            <p class="fragment"><a href="http://www.voidspace.org.uk/python/mock/">Mock könyvtár</a></p>
+          </section>
+          <section>
+            <h2>Egységtesztek</h2>
+            <h3>Nose</h3>
+            <p>Egy általános tesztfuttató környezet, djangohoz is.</p>
+            <p>Okosabb a beépített django test futtatónál</p>
           </section>
         </section>
 
@@ -210,6 +252,7 @@ def my_view(request, pk):
                   <li>get_object_or_404</li>
                   <li>generic views</li>
                   <li>reverse</li>
+                  <li>login_required</li>
                 </ul>
               </li>
             </ul>
@@ -219,6 +262,7 @@ def my_view(request, pk):
               <li>gyakori válasz: sablonból renderelt válasz</li>
               <li>generic_views</li>
               <li>reverse és HttpResponseRedirect</li>
+              <li>login_required dekorátor</li>
             </aside>
           </section>
           <section>
@@ -278,10 +322,15 @@ class MyView(object):
                   <li>Block: {% mytag %}...{% endmytag %}</li>
                 </ul>
               </li>
+              <li>Saját template tag, filter</li>
             </ul>
             <aside class="notes">
               <li class="hf">Last.fm kereső proxy</li>
             </aside>
+          </section>
+          <section>
+            <h2>Sablon réteg</h2>
+            <p class="fragment">Alternatíva: Jinja</p>
           </section>
         </section>
 
@@ -321,8 +370,27 @@ class MyView(object):
 
         <section>
           <section>
+            <h2>Parancsok írása</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
             <h2>Auth handler</h2>
           </section>
+        </section>
+
+        <section>
+          <h2>Django alternatíva</h2>
+          <p>Több is van: microframework / macroframework</p>
+          <p class="fragment">Pyramid
+            <ul>
+              <li>Általános keretbe integrál kiváló eszközöket</li>
+              <li class="fragment">ORM: SQLAlchemy</li>
+              <li class="fragment">Sablon: Jinja</li>
+              <li class="fragment">Űrlapok: FormAlchemy</li>
+            </ul>
+          </p>
         </section>
 
         <section>
@@ -332,6 +400,18 @@ class MyView(object):
           </div>
           <aside class="notes">
           </aside>
+        </section>
+
+        <section>
+          <section>
+            <h2>Last.fm kereső proxy</h2>
+            <ul>
+              <li>Egy űrlapon beküldesz egy keresőszót, ami az előadó nevére keres (get_or_create)</li>
+              <li>A szó alapján az adatbázisból visszaadod az előadók listáját (ListView)</li>
+              <li>A kiválasztott előadó részletes adatlapját is meg tudod nézni (DetailView)</li>
+              <li>Egységtesztekkel: Model, ModelManager, Nézetek</li>
+            </ul>
+          </section>
         </section>
       </div>
 
