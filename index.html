@@ -1,50 +1,50 @@
 <!doctype html>
 <html lang="en">
 
-  <head>
-    <meta charset="utf-8">
+<head>
+  <meta charset="utf-8">
 
-    <title>Webfejlesztés a gyakorlatban</title>
+  <title>Webfejlesztés a gyakorlatban</title>
 
-    <meta name="description" content="A 2012/2013 tavaszi félévben tartott Webfejlesztés a gyakorlatban kurzus előadásvázlata">
-    <meta name="author" content="Viktor Nagy">
+  <meta name="description" content="A 2012/2013 tavaszi félévben tartott Webfejlesztés a gyakorlatban kurzus előadásvázlata">
+  <meta name="author" content="Viktor Nagy">
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-<!--     <link rel="stylesheet" href="css/theme/pulilab.css" id="theme"> -->
-    <style>
-body::after {
-  position: fixed;
-  bottom: 40px; left: 20px;
-  display: block;
-  width: 201px; height: 48px;
-  background: url('img/pulilab-logo.png') 0 0 no-repeat;
-  content: '';
-}
-header h1{
-  margin-top: 70px;
-  text-align: center;
-}
-.toc-h3 {
-  margin-left: 0px;
-}
-.toc-h4 {
-  margin-left: 10px;
-}
-.toc-h5 {
-  margin-left: 20px;
-}
-    </style>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!--     <link rel="stylesheet" href="css/theme/pulilab.css" id="theme"> -->
+  <style>
+  body::after {
+    position: fixed;
+    bottom: 40px; left: 20px;
+    display: block;
+    width: 201px; height: 48px;
+    background: url('img/pulilab-logo.png') 0 0 no-repeat;
+    content: '';
+  }
+  header h1{
+    margin-top: 70px;
+    text-align: center;
+  }
+  .toc-h3 {
+    margin-left: 0px;
+  }
+  .toc-h4 {
+    margin-left: 10px;
+  }
+  .toc-h5 {
+    margin-left: 20px;
+  }
+  </style>
 
-    <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="lib/css/zenburn.css">
+  <!-- For syntax highlighting -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
 
-    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
-    <script>
-      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-    </script>
+  <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+  <script>
+  document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+  </script>
 
     <!--[if lt IE 9]>
     <script src="lib/js/html5shiv.js"></script>
@@ -52,26 +52,27 @@ header h1{
   </head>
 
   <body data-spy="scroll" data-target=".navbar">
-<a name="top"></a>
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-      <a class="brand" href="/#top">Webfejlesztés a gyakorlatban</a>
-      <ul class="nav">
-        <li><a href="#eloadasok">Előadások</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle"
-             data-toggle="dropdown"
-             href="#">
+    <a name="top"></a>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/#top">Webfejlesztés a gyakorlatban</a>
+          <ul class="nav">
+            <li><a href="#eloadasok">Előadások</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle"
+              data-toggle="dropdown"
+              href="#">
               Projektötletek
               <b class="caret"></b>
             </a>
-          <ul class="dropdown-menu">
-            <li><a href="#projekt1">Tagsági alkalmazás</a></li>
-          </ul>
-        </li>
-        <li><a href="#kapcsolat">Kapcsolat</a></li>
-      </ul>
+            <ul class="dropdown-menu">
+              <li><a href="#projekt1">Tagsági alkalmazás</a></li>
+              <li><a href="#projekt2">Filmjeim</a></li>
+            </ul>
+          </li>
+          <li><a href="#kapcsolat">Kapcsolat</a></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -81,144 +82,229 @@ header h1{
   <div class="container">
     <div class="row">
       <div class="offset2 span10">
-      <section id="eloadasok">
-        <h2>Előadások</h1>
-        <ul>
-        <li><a href="webdev1.html">1. alkalom</a></li>
-        <li><a href="webdev2.html">2. alkalom</a></li>
-        <li><a href="webdev3.html">3. alkalom</a></li>
-        <li><a href="webdev4.html">4. alkalom</a></li>
-        <li><a href="webdev5.html">5. alkalom</a></li>
-        <li><a href="webdev6.html">6. alkalom</a></li>
-        <li><a href="webdev7.html">7. alkalom</a></li>
-        <li><a href="webdev8.html">8. alkalom</a></li>
-        </ul>
-      </section>
-    
-      <section id="projektek" class="row">
-        <h2>Projektötletek</h2>
-        <div id="projekt1" class="span7">
-        <h3>Tagsági alkalmazás</h3>
+        <section id="eloadasok">
+          <h2>Előadások</h1>
+            <ul>
+              <li><a href="webdev1.html">1. alkalom</a></li>
+              <li><a href="webdev2.html">2. alkalom</a></li>
+              <li><a href="webdev3.html">3. alkalom</a></li>
+              <li><a href="webdev4.html">4. alkalom</a></li>
+              <li><a href="webdev5.html">5. alkalom</a></li>
+              <li><a href="webdev6.html">6. alkalom</a></li>
+              <li><a href="webdev7.html">7. alkalom</a></li>
+              <li><a href="webdev8.html">8. alkalom</a></li>
+            </ul>
+          </section>
 
-<p>A feladatban meg szeretnénk oldani egy jóga egyesület jógázóinak nyilvántartását. Kétféle jógázó van: bérletes és napi jegyes. Az egyes jógaalkalmak elején ezeket regisztrálni kell a rendszerben az esetleges új bérletvásárlásokkal együtt.</p>
+          <section id="projektek" class="row">
+            <h2>Projektötletek</h2>
+            <div id="projekt1" class="span7">
+              <h3>Tagsági alkalmazás</h3>
 
-<p>A cél egy olyan alkalmazás lefejlesztése, ami internetkapcsolat nélkül mobiltelefonon is el tud futni, de külön kérésre a szerverrel is szinkronizálható.</p>
+              <p>A feladatban meg szeretnénk oldani egy jóga egyesület jógázóinak nyilvántartását. Kétféle jógázó van: bérletes és napi jegyes. Az egyes jógaalkalmak elején ezeket regisztrálni kell a rendszerben az esetleges új bérletvásárlásokkal együtt.</p>
 
-<h4>Funkciók</h4>
+              <p>A cél egy olyan alkalmazás lefejlesztése, ami internetkapcsolat nélkül mobiltelefonon is el tud futni, de külön kérésre a szerverrel is szinkronizálható.</p>
 
-<ul>
-<li>Aktív jógások lekérése a szerverről, kapcsolódó bérletadatokkal együtt. Adatok letárolása a telefonon.</li>
-<li>Jógaórák objektum: egyszerű név (alapértelmezett értékkel)</li>
-<li>Offline módban keresés a jógások közt, hogy az illető részt vett az órán</li>
-<li>Bérletvásárlás regisztrálása offline módban</li>
-<li>Jógán résztvevők és bérletvásárlások feltöltése a szerverre</li>
-</ul>
+              <h4>Funkciók</h4>
 
-<h4>Objektumok</h4>
+              <ul>
+                <li>Aktív jógások lekérése a szerverről, kapcsolódó bérletadatokkal együtt. Adatok letárolása a telefonon.</li>
+                <li>Jógaórák objektum: egyszerű név (alapértelmezett értékkel)</li>
+                <li>Offline módban keresés a jógások közt, hogy az illető részt vett az órán</li>
+                <li>Bérletvásárlás regisztrálása offline módban</li>
+                <li>Jógán résztvevők és bérletvásárlások feltöltése a szerverre</li>
+              </ul>
 
-<h5>Bérlet</h5>
+              <h4>Objektumok</h4>
 
-<ul>
-<li>tulajdonos</li>
-<li>kezdete</li>
-<li>vége</li>
-<li>fizetett összeg (default=8000)</li>
-</ul>
+              <h5>Bérlet</h5>
 
-<h5>Jógázó</h5>
+              <ul>
+                <li>tulajdonos</li>
+                <li>kezdete</li>
+                <li>vége</li>
+                <li>fizetett összeg (default=8000)</li>
+              </ul>
 
-<ul>
-<li>név</li>
-<li>becenév</li>
-<li>e-mailcím</li>
-</ul>
+              <h5>Jógázó</h5>
 
-<h5>Jógaóra</h5>
+              <ul>
+                <li>név</li>
+                <li>becenév</li>
+                <li>e-mailcím</li>
+              </ul>
 
-<ul>
-<li>megnevezés
-vagy</li>
-<li>időpont és helyszín</li>
-</ul>
+              <h5>Jógaóra</h5>
 
-<h5>Jógán résztvevő</h5>
+              <ul>
+                <li>megnevezés
+                  vagy</li>
+                  <li>időpont és helyszín</li>
+              </ul>
 
-<ul>
-<li>-> Jógaóra</li>
-<li>-> Jógázó</li>
-<li>-> Bérlet (opcionális)      </li>
-<li>fizetett összeg (default=1000)</li>
-</ul>
+              <h5>Jógán résztvevő</h5>
 
-<h4>Nézetek</h4>
+              <ul>
+                <li>-> Jógaóra</li>
+                <li>-> Jógázó</li>
+                <li>-> Bérlet (opcionális)      </li>
+                <li>fizetett összeg (default=1000)</li>
+              </ul>
 
-<h5>Jógaóra nézet</h5>
+              <h4>Nézetek</h4>
 
-<p>Itt lehet megadni az aktuális óra megnevezését, majd alatta egy auto-complete szöveges mezőben lehet a jógázót kiválasztani vagy új név esetén új jógázót felvenni</p>
+              <h5>Jógaóra nézet</h5>
 
-<p>Összeg megadása opcionális</p>
+              <p>Itt lehet megadni az aktuális óra megnevezését, majd alatta egy auto-complete szöveges mezőben lehet a jógázót kiválasztani vagy új név esetén új jógázót felvenni</p>
 
-<h5>Bérletvásárlás nézet</h5>
+              <p>Összeg megadása opcionális</p>
 
-<p>Egy auto-complete szöveges mezőben lehet a jógázót kiválasztani vagy új név esetén új jógázót felvenni.</p>
+              <h5>Bérletvásárlás nézet</h5>
 
-<p>Összeg megadása kötelező</p>
+              <p>Egy auto-complete szöveges mezőben lehet a jógázót kiválasztani vagy új név esetén új jógázót felvenni.</p>
 
-<h5>Szinkronizálás nézet</h5>
+              <p>Összeg megadása kötelező</p>
 
-<p>Két gomb: lekérjük vagy felküldjük az adatokat</p>
+              <h5>Szinkronizálás nézet</h5>
 
-<h4>Technológiák</h4>
+              <p>Két gomb: lekérjük vagy felküldjük az adatokat</p>
 
-<h5>Kliens oldalon</h5>
+              <h4>Technológiák</h4>
 
-<ul>
-<li>Localstorage-ban letárolt adatok a mobilon </li>
-<li>PhoneGap/Titanium az alkalmazás környezetéhez (sima webview elegendő)</li>
-</ul>
+              <h5>Kliens oldalon</h5>
 
-<h5>Szerver oldalon</h5>
+              <ul>
+                <li>Localstorage-ban letárolt adatok a mobilon </li>
+                <li>PhoneGap/Titanium az alkalmazás környezetéhez (sima webview elegendő)</li>
+              </ul>
 
-<ul>
-<li>Django + REST framework </li>
-</ul>
+              <h5>Szerver oldalon</h5>
 
-<h5>Adatszinkronizálás</h5>
+              <ul>
+                <li>Django + REST framework </li>
+              </ul>
 
-<ul>
-<li>adatkonfliktusra nem kell számítani</li>
-<li>egyszerű GET, POST, PUT műveletek</li>
-<li>csak authentikált felhasználónak érhető el </li>
-</ul>
+              <h5>Adatszinkronizálás</h5>
+
+              <ul>
+                <li>adatkonfliktusra nem kell számítani</li>
+                <li>egyszerű GET, POST, PUT műveletek</li>
+                <li>csak authentikált felhasználónak érhető el </li>
+              </ul>
+            </div>
+            <aside class="span3">
+              <h3>Tartalom</h3>
+              <div id="projekt1-toc" ></div>
+            </aside>
+            <div id="projekt2" class="span7">
+              <h3>Watchlist</h3>
+              <p>Egy olyan alkalmazást szeretnénk, ahol összegyűjthetem a megnézendő és megnézett filmeket, a megnézettekhez írhatok megjegyzést, a megnézendőket megoszthatom az ismerőseimmel és akár időpontot is tudok egyeztetni egy filmnézéshez.</p>
+
+              <p>Nem az a cél, hogy a világ számára vélemény írjak egy filmről, hanem hogy magamnak és a velem együtt filmezőknek meglegyen, hogy mit néztünk, és tudjunk róla beszélni.</p>
+
+              <h4>Funkciók</h4>
+
+              <ul>
+                <li>felhasználók kezelése</li>
+                <li>ismerősök kezelése</li>
+                <li>keresés IMDB/TMDB adatbázisban filmekre</li>
+                <li>megnézendő filmek eltárolása</li>
+                <li>megnézett filmek eltárolása</li>
+                <li>filmnézés regisztrálása (akár utólag, akár előre)</li>
+                <li>megnézett filmekhez megjegyzések írása (csak a résztvevők láthatják)</li>
+                <li>megnézendő filmek megosztása ismerősökkel (opcionális)</li>
+              </ul>
+
+              <h4>Objektumok</h4>
+
+              <h5>Felhasználók</h5>
+
+              <h5>Felhasználói kapcsolatok</h5>
+
+              <ul>
+                <li>M2M Felhasználó </li>
+                <li>visszaigazolt / nem visszaigazolt</li>
+              </ul>
+
+              <h5>Film</h5>
+
+              <ul>
+                <li>IMDB/TMDB hivatkozás</li>
+                <li>alapvető adatok</li>
+              </ul>
+
+              <h5>Felhasználói film</h5>
+
+              <ul>
+                <li>-&gt; Film</li>
+                <li>-&gt; Felhasználó</li>
+                <li>-&gt; Állapot</li>
+              </ul>
+
+              <h5>Filmnézés</h5>
+
+              <ul>
+                <li>-&gt; Felhasználói film (ő egyben a szervező)</li>
+                <li>Időpont</li>
+                <li>Résztvevők [-&gt; Felhasználók]</li>
+                <li>[Megjegyzések]</li>
+              </ul>
+
+              <h5>Megjegyzés</h5>
+
+              <h4>Nézetek</h4>
+
+              <h5>Belépés, regisztrálás</h5>
+
+              <h5>Film keresése</h5>
+
+              <ul>
+                <li>get<em>or</em>create felülírása a Manageren</li>
+              </ul>
+
+              <h5>Felhasználói film kezelése</h5>
+
+              <ul>
+                <li>a film keresése nézetből létrehozhatunk vagy egy megnézett vagy egy megnézendő Felhasználi filmet</li>
+                <li>ezekhez tudunk Filmnézést létrehozni, minden Filmnézéssel (múltbeli dátummal) rendelkező film megnézett film</li>
+              </ul>
+
+              <h5>Filmnézés nézet</h5>
+
+              <p>itt lehet megjegyzéseket adni a filmekhez</p>
+            </div>
+            <aside class="span3">
+              <h3></h3>
+              <div id="projekt2-toc"></div>
+            </aside>
+          </section>        
+
+            <section id="kapcsolat">
+              <h2>Kapcsolat</h2>
+              <ul>
+                <li>Nagy Viktor</li>
+                <li><a href="http://pulilab.com">The Pulilab Kft</a></li>
+              </ul>
+            </section>
+
+          </div>
         </div>
-        <aside class="span3">
-          <h3>Tartalom</h3>
-          <div id="projekt1-toc" ></div>
-        </aside>
-      </section>        
 
-      <section id="kapcsolat">
-        <h2>Kapcsolat</h2>
-        <ul>
-          <li>Nagy Viktor</li>
-          <li><a href="http://pulilab.com">The Pulilab Kft</a></li>
-        </ul>
-      </section>
 
       </div>
-    </div>
-
-
-    </div>
-<a href="https://github.com/pulilab/webfejlesztes-oktatas"><img style="position: absolute; top: 0; right: 0; border: 0; z-index:1040" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.toc.min.js"></script>
-    <script>
-    $('#projekt1-toc').toc({
-      'selectors': 'h3,h4,h5',
-      'container': '#projekt1'
-    })
-    </script>
-  </body>
-</html>
+      <a href="https://github.com/pulilab/webfejlesztes-oktatas"><img style="position: absolute; top: 0; right: 0; border: 0; z-index:1040" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+      <script src="http://code.jquery.com/jquery.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script src="js/jquery.toc.min.js"></script>
+      <script>
+      $('#projekt1-toc').toc({
+        'selectors': 'h3,h4,h5',
+        'container': '#projekt1'
+      });
+      $('#projekt2-toc').toc({
+        'selectors': 'h3,h4,h5',
+        'container': '#projekt2'
+      });
+      </script>
+    </body>
+    </html>
