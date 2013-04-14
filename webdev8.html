@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title>7. alkalom - Webfejlesztés a gyakorlatban</title>
+    <title>8. alkalom - Webfejlesztés a gyakorlatban</title>
 
     <meta name="description" content="A 2012/2013 tavaszi félévben tartott Webfejlesztés a gyakorlatban kurzus előadásvázlata">
     <meta name="author" content="Viktor Nagy">
@@ -318,14 +318,14 @@ class MyView(object):
             <h2>Sablon réteg</h2>
             <ul>
               <li>Saját sablonnyelv (kicsit elavult)</li>
-              <li>Filter: {{valtozo|my_filter}}</li>
-              <li>Template tag: 
+              <li class="fragment">Filter: {{valtozo|my_filter}}</li>
+              <li class="fragment">Template tag: 
                 <ul>
                   <li>Inline: {% ... %} </li>
                   <li>Block: {% mytag %}...{% endmytag %}</li>
                 </ul>
               </li>
-              <li>Saját template tag, filter</li>
+              <li class="fragment">Saját template tag, filter írható</li>
             </ul>
             <aside class="notes">
               <li class="hf">Last.fm kereső proxy</li>
@@ -333,7 +333,29 @@ class MyView(object):
           </section>
           <section>
             <h2>Sablon réteg</h2>
-            <p class="fragment">Alternatíva: Jinja</p>
+            <h3>Használat</h3>
+            <pre><code>from django.template import Context, Template
+t = Template("My name is {{ my_name }}.")
+c = Context({"my_name": "Adrian"})
+rendered = t.render(c) # "My name is Adrian."</code></pre>
+            <pre class="fragment"><code>from django.template.loader import render_to_string
+rendered = render_to_string('my_template.html', { 'my_name': 'Adrian' })</code></pre>
+          </section>
+          <section>
+            <h2>Sablon réteg</h2>
+            <h3>Példa sablon</h3>
+            <pre><code>{% extends "base.html" %}
+{% load sekizai_tags %}
+{% block "main" %}
+  &lt;div>{{ my_variable.mymethod|upper }}&lt;/div>
+  {% addtoblock "js" %}...{% endaddtoblock %}
+{% endblock %}
+            </code></pre>
+          </section>
+          <section>
+            <h2>Sablon réteg</h2>
+            <h3>Alternatív</h3>
+            <p>Jinja</p>
           </section>
         </section>
 
@@ -342,20 +364,100 @@ class MyView(object):
             <h2>Routing</h2>
             <ul>
               <li>regexp alapú</li>
+              <li>egymásba ágyazható routing beállítások</li>
               <li>URL &lt;-&gt; view megfeleltetés</li>
             </ul>
+            <aside class="notes">
+              <li>regexp alapú: nem kell tőle megijedni, ha nem is vágod a regexp-et, csak néhány mintát kell megtanulni</li>
+              <li>egymásba ágyazhatóság: az egyes appoknak csak a saját routingukat kell ismerniük</li>
+            </aside>
+          </section>
+          <section>
+            <h2>Routing</h2>
+            <h3>Példa</h3>
+            <pre><code>from django.conf.urls import patterns, include, url
+
+urlpatterns = patterns('',
+    url(r'^$', include('homepage.urls')),
+    url(r'^api/', include('client_api.urls')),
+    url(r'^api/', include('playlist.api_urls')),
+    url(r'^', include('playlist.urls')),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
+)</code></pre>
+            <aside class="notes">
+              <li>homepage: ^$ = üres sztring</li>
+              <li>include: így ágyazunk egymásba url beállísokat</li>
+              <li>api/: több hivatkozás ugyanahhoz az url-hez?</li>
+              <li>views.login: konkrét view függvényt hívünk meg, esetlegesen további argumentumokkal</li>
+            </aside>
           </section>
         </section>
 
         <section>
           <section>
             <h2>Űrlapkezelés</h2>
+            <ul>
+              <li>Minden bejövő adatot ellenőrizni kell</li>
+              <li class="fragment">A legtöbb adat ellenőrzése triviálisan következik a model sémából</li>
+              <li class="fragment">Az űrlap gyakran egyszerűen következik a modellből</li>
+              <li class="fragment">de legyen teljes mértékben testre szabható</li>
+            </ul>
+            <p class="highlight-red fragment">Sokkal összetettebb, mint elsőre tűnik</p>
+            <aside class="notes">
+            Összetett:
+            <li>form</li>
+            <li>modelform</li>
+            <li>form wizard / modelform wizard</li>
+            <li>form_factory / modelform factory</li>
+          </aside>
+          </section>
+          <section>
+            <h2>Űrlapkezelés</h2>
+            <h3>Modelform</h3>
+            <pre><code>from django import forms
+from .models import Playlist
+
+class PlaylistForm(forms.ModelForm):
+    class Meta:
+        model = Playlist
+
+    def save(self, commit=True):
+        # do something here ...
+        pl = super(PlaylistForm, self).save(commit)
+        # do something here ...
+        return pl
+
+## view ##
+from .forms import PlaylistForm
+
+def my_view(request):
+  myform = PlaylistForm(data=request.POST)
+  if myform.is_valid():
+      pl = myform.save()
+      return HttpResponseRedirect('/')
+  else:
+      return render_to_string('edit.html', {form: myform})</code></pre>
+          <aside class="notes">
+            <li>az űrlap nagyon egyszerűen létrehozható</li>
+            <li>kell hozzá nézet is, ami használja</li>
+            <li>különválasztva jobban tesztelhető mindkért rész</li>
+          </aside>
           </section>
         </section>
 
         <section>
           <section>
             <h2>Middleware réteg</h2>
+            <ul>
+              <li>Lényege, hogy megváltoztassa, bővítse a request/response folyamatot.</li>
+            </ul>
+            <img src="img/middleware.png" alt="Django middleware">
+            <aside class="notes">
+              <li>A nézet előtt és után egyaránt lefuthat a middleware</li>
+              <li>Körbeöleli a request/response-t, ami először volt requestnél, utolsó a responsenál</li>
+              <li>A sorrend számít</li>
+              <li class="hf">Állítsatok össze egy egyszerű honlapot, ahol be lehet Facebook-kal jelentkezni. Ehhez kliens oldalon csak a FB SDK-t használhatjátok, szerver oldalon pedig az átadott süti alapján azonosítsa a usert egy middleware.</li>
+            </aside>
           </section>
         </section>
 
