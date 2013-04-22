@@ -376,6 +376,7 @@ rendered = render_to_string('my_template.html', { 'my_name': 'Adrian' })</code><
             <h2>Routing</h2>
             <h3>Példa</h3>
             <pre><code>from django.conf.urls import patterns, include, url
+from views import my_view
 
 urlpatterns = patterns('',
     url(r'^$', include('homepage.urls')),
@@ -383,6 +384,7 @@ urlpatterns = patterns('',
     url(r'^api/', include('playlist.api_urls')),
     url(r'^', include('playlist.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
+    url(r'myview/$', my_view),
 )</code></pre>
             <aside class="notes">
               <li>homepage: ^$ = üres sztring</li>
@@ -456,32 +458,8 @@ def my_view(request):
               <li>A nézet előtt és után egyaránt lefuthat a middleware</li>
               <li>Körbeöleli a request/response-t, ami először volt requestnél, utolsó a responsenál</li>
               <li>A sorrend számít</li>
-              <li class="hf">Állítsatok össze egy egyszerű honlapot, ahol be lehet Facebook-kal jelentkezni. Ehhez kliens oldalon csak a FB SDK-t használhatjátok, szerver oldalon pedig az átadott süti alapján azonosítsa a usert egy middleware.</li>
+              <li class="hf">Állítsatok össze egy egyszerű honlapot, ahol be lehet Facebook-kal jelentkezni.</li>
             </aside>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Admin felület</h2>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Reusable apps</h2>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Parancsok írása</h2>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Auth handler</h2>
           </section>
         </section>
 
@@ -515,6 +493,15 @@ def my_view(request):
               <li>A szó alapján az adatbázisból visszaadod az előadók listáját (ListView)</li>
               <li>A kiválasztott előadó részletes adatlapját is meg tudod nézni (DetailView)</li>
               <li>Egységtesztekkel: Model, ModelManager, Nézetek</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Facebook login</h2>
+            <p>A feladat egy cikk írása, ami bemutatja hogyan működik a facebook bejelentkeztetés (authentication) django alatt, és ehhez kapcsolódóan egy mintaalkalmazás írása.</p>
+            <ul>
+              <li>Kliens oldalon csak a FaceBook Javascript SDK-t használhatjátok, itt jelentkezik be a felhasználó.</li>
+              <li>Szerver oldalon a lekérés során átadott sütiből azonosítsa a usert egy middleware.</li>
+              <li>A middleware-t nem kell neked megírni, használhatsz létező megoldást is!</li>
             </ul>
           </section>
         </section>

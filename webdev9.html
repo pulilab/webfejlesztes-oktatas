@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>9. alkalom - Webfejlesztés a gyakorlatban</title>
+
+    <meta name="description" content="A 2012/2013 tavaszi félévben tartott Webfejlesztés a gyakorlatban kurzus előadásvázlata">
+    <meta name="author" content="Viktor Nagy">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/pulilab.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section>
+          <h1>Webfejlesztés a gyakorlatban</h1>
+          <h3>Django gyakorlat</h3>
+          <p>
+            <small><a href="mailto:v@pulilab.com">Viktor Nagy</a>, <a href="http://pulilab.com">Pulilab Kft.</a>, <a href="http://pulilab.github.com/webfejlesztes-oktatas/">Honlap</a></small>
+          </p>
+        </section>
+
+        <section>
+          <section>
+            <h2>Projekt felépítése</h2>
+            <dl>
+              <dt>projekt (project)</dt>
+              <dd></dd>
+              <dt>alkalmazás (app)</dt>
+              <dd></dd>
+            </dl>
+          </section>
+          <section>
+            <h2>Projekt felépítése</h2>
+            <h3>Projekt indítása</h3>
+            <ol>
+              <li>django-admin.py startproject</li>
+              <li class="fragment">Használj <a href="https://github.com/pulilab/django-skel2/">egy kész sablon</a>t</li>
+              <li class="fragment">virtualenv</li>
+              <li class="fragment">pip install</li>
+              <li class="fragment">settings.py</li>
+            </ol> 
+            <aside class="notes">
+              <li>pip install -r requirements</li>
+              <li>settings: adatbázis</li>
+              <li>végül syncdb, runserver</li>
+            </aside>
+          </section>
+          <section>
+            <h2>Projekt felépítése</h2>
+            <h3>Alkalmazás indítása</h3>
+            <ol>
+              <li>django-admin.py startapp</li>
+              <li class="fragment">Használj <a href="https://github.com/pulilab/django-app-template">egy kész sablon</a>t</li>
+              <li class="fragment">setup.py develop</li>
+              <li class="fragment">INSTALLED_APP, urls.py</li>
+              <li class="fragment">Indulhat a fejlesztés</li>
+            </ol>
+          </section>
+          <aside class="notes">
+            <li>az app külön fog állni a projekttől, bárhol használható</li>
+            <li>setup.py develop, setup.py install</li>
+            <li>app a requirements fileba</li>
+          </aside>
+        </section>
+
+        <section>
+          <section>
+            <h2>Django fejlesztés</h2>
+            <h3>Javasolt menet</h3>
+            <ol>
+              <li class="fragment">models + tests</li>
+              <li class="fragment">folyamatosan refaktorálva, újratesztelve</li>
+              <li class="fragment">dummy urls.py + views.py + forms.py</li>
+              <li class="fragment">forms + tests</li>
+              <li class="fragment">urls, views + tests</li>
+              <li class="fragment">templates + view rendering</li>
+            </ol>
+            <p class="fragment">
+              Közben feljöhetnek más szükségletek
+              <ul class="fragment">
+                <li>ModelManager</li>
+                <li class="fragment">Model refaktorálás</li>
+                <li class="fragment">Middleware</li>
+                <li class="fragment">Templatetag</li>
+              </ul>
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <h1>Jövő hétre</h1>
+          <div id="hf-out">
+            <li>Minden házihoz legyenek egységtesztek!</li>
+            <li>a #TODO részek megvalósítása</li>
+          </div>
+          <aside class="notes">
+          </aside>
+        </section>
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script type="text/javascript" src="js/puli-hf.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/extract/extract.js', async: true, condition: function() { return true; } },
+          { src: 'plugin/toc/toc.js', async: false, condition: function() { return true; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
